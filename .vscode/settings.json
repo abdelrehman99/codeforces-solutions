@@ -1,0 +1,4 @@
+{
+    "debug.onTaskErrors": "showErrors",
+    "C_Cpp.errorSquiggles": "Disabled"
+}
