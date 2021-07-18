@@ -9,21 +9,40 @@ typedef long long ll;typedef long double ld;typedef pair<int,int> pii;
 const ll mod = 1e9+7, N = 2e6+7, M = 2e6+7, INF = INT_MAX/10;
 ll powe(ll x, ll y){ x = x%mod, y=y%(mod-1);ll ans = 1;while(y>0){if (y&1){ans = (1ll * x * ans)%mod;}y>>=1;x = (1ll * x * x)%mod;}return ans;}
 
+long long a[101][101];
 
 
+void C()
+{
+    for (int i = 2; i <= 100; i++)
+    {
+        for (int j = 2; j < i; j++)
+        {
+            a[i][j] = a[i - 1][j] + a[i - 1][j - 1];
+        }      
+    }
+}
 
-void solve(){
-	
+void solve()
+{
+	int n, r;
+    C();
+    while (cin >> n >> r)
+    {
+        cout << ( (r == 0) ? 1 : (n == r || r == 1 ? n : a[n][r] )) << endl;
+    }
 }
 
 
 
 
-signed main(){
+signed main()
+{
     fast;
     int t = 1;
-    cin >> t;
-    while(t--){
+    //cin >> t;
+    while(t--)
+    {
     	solve();
     }
     return 0;
