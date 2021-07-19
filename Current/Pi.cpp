@@ -14,33 +14,32 @@ ll powe(ll x, ll y){ x = x%mod, y=y%(mod-1);ll ans = 1;while(y>0){if (y&1){ans =
 
 void solve()
 {
-	int t, n, c;
-    cin >> t;
-    while (t--)
+	int n, c;
+    while (cin >> n && n != 0)
     {
-        cin >> n;
         c = 0;
-        vector < bool> v(n + 1);
-        for (int i = 2; i <= n; i++)
+        vector <int> v(n);
+        int t = n * (n-1) / 2;
+        for (int i = 0; i < n; i++) cin >> v[i];
+        for (int i = 0; i < n; i++)
         {
-            v[i] = !v[i];
-            for (int j = i + 1; j <= n; j++)
+            for (int j = i + 1; j < n; j++)
             {
-                if (j % i == 0) v[j] = !v[j];
+                if (__gcd(v[i], v[j]) == 1) c++; 
             }
+            //cout << i + 1 << " " << c << endl;
         }
-        for (int j = 1; j <= n; j++)
-        {
-            if (!v[j]) c++;
-        }
-        cout << c << endl;
+        //cout << c << endl;
+        if (c == 0) cout << "No estimate for this data set.\n";
+        else cout << fixed << setprecision (6) << sqrt ( (t * 6) / (c * 1.0)) << endl;
     }
 }
 
 
 
 
-signed main(){
+signed main()
+{
     fast;
     //int t = 1;
     //cin >> t;

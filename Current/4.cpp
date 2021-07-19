@@ -32,7 +32,8 @@ void solve()
 
 
 
-signed main(){
+signed main()
+{
     fast;
     int t = 1;
     cin >> t;
