@@ -27,27 +27,40 @@ ll powe(ll x, ll y){ x = x%mod, y=y%(mod-1);ll ans = 1;while(y>0){if (y&1){ans =
 
 
 void solve()
-{ 
-    llu n, m;
-    cin >> n >> m;
-    llu l1, l2, r1, r2;
-    l1 = (n % 13 == 0 ? (n / 13) : (n / 13) + 1);
-    l2 = (m / 13);
-    r1 = (n % 5 == 0 ? (n / 5) : (n / 5) + 1);
-    r2 = (m / 5);
-    set <llu> v;
-   //cout << l1 << " " << l2 << endl;
-    //cout << r1 << " " << r2 << endl;
-    while (l1 <= l2 || r1 <= r2)
+{
+    ll n, t;
+    cin >> n;
+    vector <long> pos, neg;
+    bool pose = true, nege = true;
+    for (int i = 0; i < n; i++)
     {
-        if (l1 <= l2) v.insert(l1 * 13);
-        l1++;
-        if (r1 <= r2) v.insert(r1 * 5);
-        r1++;
+        cin >> t;
+        if (t > 0)
+        {
+            if ((!nege && pose) || pos.empty()) pos.PB(t), nege = true, pose = false;
+            else if (!pos.empty() && pos.back() < t) pos.back() = t;
+        }
+        else
+        {
+            if ((!pose && nege) || neg.empty()) neg.PB(t), pose = true, nege = false;
+            else if (!neg.empty() && neg.back() < t) neg.back() = t;
+        }
     }
-    //if (n % 5 == 0 || n % 13 == 0 || n)
-    cout << (m - n) - v.size() + 1 << endl;
-    //cout << endl;
+    reverse(all(pos));
+    reverse(all(neg));
+    /*for (auto &i : pos) cout << i << " ";
+    cout << "\t";
+    for (auto &i : neg) cout << i << " ";
+    cout << endl; */
+    long unsigned int  l = 0, r = 0;
+    long  long sum = 0;
+    while (l < pos.size() || r < neg.size())
+    {
+        if (l < pos.size()) sum += pos[l];
+        if (r < neg.size()) sum += neg[r];
+        l++, r++;
+    }
+    cout << sum << endl;
 }
 
 
@@ -57,9 +70,36 @@ signed main(){
     fast;
     int t = 1;
     cin >> t;
-    WL(t){
+    WL(t)
+    {
     	solve();
-        runtime();
     }
+    runtime();
     return 0;
 }
+/* vpii neg(n), pos(n);
+    int i = 0, j = 0;
+    for (int c = 0; c < n; c++)
+    {
+        cin >> t;
+        (t > 0 ? pos[i] = {t, c}, i++ : neg[j].F = t, neg[j].S = c, j++);
+        (f == 0 ? f = t : f = f);
+    }
+    --j, --i;
+    sub = 
+    sort(all(pos));
+    sort(all(neg));
+    if (pos.size() == 0) cout << neg[j].F << endl;
+    else if (neg.size() == 0) cout << pos[j].F << endl;
+    else 
+    {
+        ll l = 0, r = 1, ans = INT_MIN, sum = 0;
+        (f < 0 ? l = 1, sum = neg[0] : r = 1, sum = pos[0]);
+        while (l < j && r < i)
+        {
+            if ((f < 0 ? l <= r : l < r)) sum += (neg[l]), l++;
+            else sum += pos[r], r++;
+            ans = max(sum, ans);
+        }
+        cout << ans << endl;
+    } */
