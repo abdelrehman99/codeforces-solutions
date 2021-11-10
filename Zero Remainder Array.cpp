@@ -26,39 +26,32 @@ const ll mod = 1e9+7, N = 2e6+7, M = 2e6+7, INF = INT_MAX/10;
 ll powe(ll x, ll y){ x = x%mod, y=y%(mod-1);ll ans = 1;while(y>0){if (y&1){ans = (1ll * x * ans)%mod;}y>>=1;x = (1ll * x * x)%mod;}return ans;}
 
 
-
-
 void solve()
 { 
-    ll n, k, f, c = 1, x = 1, d = 0;
+    llu n, k, f, c = 0;
     cin >> n >> k;
-    //vl v(n);
-    map <int, int> v2;
-    //vl v2;
+    map <llu, llu> v2;
+    //vpl v(n);
+    //vl v2;   
+    //cout << 7 % 6 << endl;
     FOR (i, n)
     {
         cin >> f;
-        if (f % k == 0)
-        {
-            d++;
-        }
-        else 
-        {
-            v2[(((f / k) + 1) * k) - f]++;
-        }
+        if (f % k) v2[f % k]++;
+        //cout << f % k << endl;
+        //if (f > kk) kk = f;
     }
-    if (d == n)
+    //sort(all(v));
+    //cout << d << endl;
+    //for (auto & i : v2) cout << i.F << " " << i.S << endl;
+    //bool flag;
+    //kk = (((kk / k) + 1) * k);
+    //cout << k << " ";
+    for (auto &i : v2)
     {
-        cout << 0 << endl;
-        return;
-    }
-    //k = *(max_element(all(v))) / 
-    //d = 0;
-    while (d < n)
-    {
-        if (x > k) x -= k;
-        if (v2[x] > 0) d++, x++, c++, v2[x - 1]--;
-        else x++, c++;
+        //cout << i.S << " " << i.F << endl;
+        //if ((i.S * k) - i.F + 1 > c) cout << i.S << " " << i.F << endl;
+        c = max(c, (i.S * k) - i.F + 1);
     }
     cout << c << endl;
 }
@@ -70,7 +63,8 @@ signed main(){
     fast;
     int t = 1;
     cin >> t;
-    WL(t){
+    WL(t)
+    {
     	solve();
     }
     runtime();
