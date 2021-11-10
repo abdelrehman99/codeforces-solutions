@@ -25,7 +25,7 @@ typedef vector<vl>		vvl;
 const ll mod = 1e9+7, N = 2e6+7, M = 2e6+7, INF = INT_MAX/10;
 ll powe(ll x, ll y){ x = x%mod, y=y%(mod-1);ll ans = 1;while(y>0){if (y&1){ans = (1ll * x * ans)%mod;}y>>=1;x = (1ll * x * x)%mod;}return ans;}
 
-vl v2;
+
 
 
 void solve()
@@ -33,6 +33,7 @@ void solve()
     ll n, k, f, c = 1, x = 1, d = 0;
     cin >> n >> k;
     //vl v(n);
+    map <int, int> v2;
     //vl v2;
     FOR (i, n)
     {
